@@ -1,4 +1,4 @@
-// Задание вариант 10 (Вариант алгоритма 1 (minstd_rand))
+// Задание вариант 10 (Вариант алгоритма 10 (random_device))
 #include <iostream>
 #include <vector>
 #include <random>
@@ -30,7 +30,7 @@ vector<int> FindLongSeq(vector<int> nums) { // Самая длинная пос�
 int main(){
     srand(time(0));
     setlocale(LC_ALL, "Rus");
-    minstd_rand generator(rand());
+    random_device generator;
     
     // Блок 1
     int n = 0;
