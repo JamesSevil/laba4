@@ -5,6 +5,16 @@
 
 using namespace std;
 
+vector<int> GenerateVector(int n) { // ф-ия заполнения массива рандомными числами
+    random_device generator;
+    vector<int> nums;
+    for (int i = 0; i < n; ++i) {
+        int randnums = 10 + generator() % 90;
+        nums.push_back(randnums);
+    }
+    return nums;
+}
+
 float X2(vector<int> arr, int n) {
     const int iter = 25;
     int sum[iter] = { 0 };
@@ -29,18 +39,9 @@ int main(){
     random_device generator;
 
     // Генерирую числа для каждого массива
-    vector<int> arr50(50);
-    vector<int> arr100(100);
-    vector<int> arr1000(1000);
-    for (int i = 0; i < 50; ++i) {
-        arr50[i] = 10 + generator() % 90;
-    }
-    for (int i = 0; i < 100; ++i) {
-        arr100[i] = 10 + generator() % 90;
-    }
-    for (int i = 0; i < 1000; ++i) {
-        arr1000[i] = 10 + generator() % 90;
-    }
+    vector<int> arr50 = GenerateVector(50);
+    vector<int> arr100 = GenerateVector(100);
+    vector<int> arr1000 = GenerateVector(1000);
 
     // Результаты проверки гипотезы
     float krit = 44.314;
@@ -52,7 +53,8 @@ int main(){
     } else {
         cout << "Гипотеза о нормальном распределении отклоняется." << endl;
     }
-     cout << "Для массива на 100 элементов: " << endl;
+
+    cout << "Для массива на 100 элементов: " << endl;
     x = X2(arr100, 50);
     cout << "x^2: " << x << endl;
     if (x < krit) {
@@ -60,7 +62,8 @@ int main(){
     } else {
         cout << "Гипотеза о нормальном распределении отклоняется." << endl;
     }
-     cout << "Для массива на 1000 элементов: " << endl;
+
+    cout << "Для массива на 1000 элементов: " << endl;
     x = X2(arr1000, 50);
     cout << "x^2: " << x << endl;
     if (x < krit) {
@@ -68,7 +71,6 @@ int main(){
     } else {
         cout << "Гипотеза о нормальном распределении отклоняется." << endl;
     }
-
 
     return 0;
 }
