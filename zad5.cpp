@@ -6,21 +6,20 @@
 using namespace std;
 
 vector<int> RC4(int n, int GeneratingOutput) {
-
     // Инициализация таблиц
     vector<int> S; // Таблица S
     for (int i = 0; i < pow(2, n); i++) { // таблица замен S
         S.push_back(i);
     }
     vector<int> K; // Таблица K
-    int k = 1; // Значение ключа
+    int key = 1; // Значение ключа
     for (int i = 0; i < pow(2, n); i++) { // Таблица K с ключом от 1 до 6
-        if (k != 6) { // Записываем в таблицу K значения от 1 до 6
-            K.push_back(k);
-            k++;
+        if (key != 6) { // Записываем в таблицу K значения от 1 до 6
+            K.push_back(key);
+            key++;
         } else {
-            K.push_back(k);
-            k = 1;
+            K.push_back(key);
+            key = 1;
         }
     }
     int j = 0;
@@ -46,6 +45,15 @@ vector<int> RC4(int n, int GeneratingOutput) {
     return Z;
 }
 
+template <typename T>
+ostream& operator<<(ostream& os, const vector<T>& vec) { // перегрузка вывода вектора
+    for (const auto& element : vec) {
+        os << element << " ";
+    }
+    return os;
+}
+
+
 int main(){
     setlocale(LC_ALL, "Rus");
 
@@ -56,11 +64,8 @@ int main(){
     cout << "Введите необходимое кол-во рандомных чисел: ";
     cin >> k;
 
-    cout << "Рандомные числа:" << endl;
     vector<int> randomnums = RC4(n, k);
-    for (int i : randomnums) {
-        cout << i << " ";
-    }
+    cout << "Рандомные числа: " << randomnums << endl;
 
     return 0;
 }
