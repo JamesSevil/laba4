@@ -17,7 +17,7 @@ vector<int> Generate_Vector(int n) { // ф-ия заполнения масси�
 
 int find_mins(vector<int> nums, int& min1, int& min2) { // ф-ия нахождения 2 мин.чисел и суммы отсатков при / эл.массива на мин.число
     for (auto randnums : nums) {
-        if (randnums < min1) { // нахожу 2 минимальных
+        if (randnums < min1) {
             min2 = min1;
             min1 = randnums;
         } else if (randnums < min2 && randnums != min1) {

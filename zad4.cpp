@@ -60,7 +60,6 @@ void play(int rounds, string a_choices, string b_choices, int& score_a, int& sco
             score_b += 0;
         }
     }
-
 }
 
 

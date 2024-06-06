@@ -5,7 +5,7 @@
 
 using namespace std;
 
-vector<int> RC4(int n, int GeneratingOutput) {
+vector<int> RC4(int n, int GeneratingOutput) { // алгоритм псевдослучайной генерации чисел
     // Инициализация таблиц
     vector<int> S; // Таблица S
     for (int i = 0; i < pow(2, n); i++) { // таблица замен S
@@ -58,13 +58,13 @@ int main(){
     setlocale(LC_ALL, "Rus");
 
     int n;
-    cout << "Введите число n: ";
+    cout << "Введите число n(ограничение): ";
     cin >> n;
-    int k;
+    int countRandNums;
     cout << "Введите необходимое кол-во рандомных чисел: ";
-    cin >> k;
+    cin >> countRandNums;
 
-    vector<int> randomnums = RC4(n, k);
+    vector<int> randomnums = RC4(n, countRandNums);
     cout << "Рандомные числа: " << randomnums << endl;
 
     return 0;

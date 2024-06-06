@@ -33,10 +33,21 @@ float X2(vector<int> arr, int n) {
     return x;
 }
 
+void Hypothesis(vector<int> nums) { // Проверка гипотезы
+    float krit = 44.314;
+    cout << "Для массива на " << nums.size() << " элементов: " << endl;
+    float x = X2(nums, nums.size());
+    cout << "x^2: " << x << endl;
+    if (x < krit) {
+        cout << "Гипотеза о нормальном распределении принимается." << endl << endl;
+    } else {
+        cout << "Гипотеза о нормальном распределении отклоняется." << endl << endl;
+    }
+}
+
 int main(){
     setlocale(LC_ALL, "Rus");
     srand(time(0));
-    random_device generator;
 
     // Генерирую числа для каждого массива
     vector<int> arr50 = GenerateVector(50);
@@ -44,33 +55,9 @@ int main(){
     vector<int> arr1000 = GenerateVector(1000);
 
     // Результаты проверки гипотезы
-    float krit = 44.314;
-    cout << "Для массива на 50 элементов: " << endl;
-    float x = X2(arr50, 50);
-    cout << "x^2: " << x << endl;
-    if (x < krit) {
-        cout << "Гипотеза о нормальном распределении принимается." << endl;
-    } else {
-        cout << "Гипотеза о нормальном распределении отклоняется." << endl;
-    }
-
-    cout << "Для массива на 100 элементов: " << endl;
-    x = X2(arr100, 50);
-    cout << "x^2: " << x << endl;
-    if (x < krit) {
-        cout << "Гипотеза о нормальном распределении принимается." << endl;
-    } else {
-        cout << "Гипотеза о нормальном распределении отклоняется." << endl;
-    }
-
-    cout << "Для массива на 1000 элементов: " << endl;
-    x = X2(arr1000, 50);
-    cout << "x^2: " << x << endl;
-    if (x < krit) {
-        cout << "Гипотеза о нормальном распределении принимается." << endl;
-    } else {
-        cout << "Гипотеза о нормальном распределении отклоняется." << endl;
-    }
+    Hypothesis(arr50);
+    Hypothesis(arr100);
+    Hypothesis(arr1000);
 
     return 0;
 }

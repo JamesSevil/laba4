@@ -9,13 +9,12 @@ using namespace std;
 double f(double x) { // значение функции
     return 2*x + tan(x);
 }
-double fsh(double x) { // значение производой функции
+double fsh(double x) { // значение производной функции
     return 2 + 1/(cos(x)*cos(x));
 }
 double newton(double x0, double eps) {
     double x1 = x0 - f(x0) / fsh(x0);
     int iternum = 1;
-
     while (fabs(x1 - x0) > eps) {
         cout << iternum << setw(15) << x0 << setw(15) << x1 << setw(15) << x1 - x0 << endl;
         x0 = x1;
@@ -63,6 +62,8 @@ double bisection(double a, double b, double eps) {
 
 int main() {
     setlocale(LC_ALL, "Rus");
+    srand(time(0));
+
     // Метод Ньютона
     cout << "Метод Ньютона:" << endl << "N" << setw(15) << "xn" << setw(15) << "xn+1" << setw(15) << "xn+1 - xn" << endl;
     double x0 = 1.5; // начальное приближение
@@ -78,7 +79,7 @@ int main() {
     cout << "Корень: " << x << endl << endl;
 
     // Метод половинного деления
-     cout << "Метод половинного деления:" << endl << "N" << setw(15) << "an" << setw(15) << "bn" << setw(15) << "bn - an" << endl;
+    cout << "Метод половинного деления:" << endl << "N" << setw(15) << "an" << setw(15) << "bn" << setw(15) << "bn - an" << endl;
     double a = -10.0; // начальный интервал
     double b = 5.0;
     eps = 0.0001; // точность решения
