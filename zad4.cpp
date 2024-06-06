@@ -3,33 +3,33 @@
 
 using namespace std;
 
-bool sotr(int round_nubmber, vector<bool> self_choices, vector<bool> enemy_choices) { // Всегда сотрудничает
+bool sotr() { // Всегда сотрудничает
     return true;
 }
 
-bool pred(int round_number, vector<bool> self_choices, vector<bool> enemy_choices) { // Всегда предает
+bool pred() { // Всегда предает
     return false;
 }
 
-bool notrepeat(int round_number, vector<bool> self_choices, vector<bool> enemy_choices) { // Сначала сотрудничает, а далее не повторяет выбор соперника за предыдущих ход
+bool notrepeat(int round_number, vector<bool> enemy_choices) { // Сначала сотрудничает, а далее не повторяет выбор соперника за предыдущих ход
     if (round_number == 0) return true; // первый раунд - сотрудничает
-    else if (enemy_choices[round_number - 1] == true) return false; // не повторяет предыдущий ход соперника
+    else if (enemy_choices[round_number - 2] == true) return false; // не повторяет предыдущий ход соперника
     else return true;
 }
 
-void play(int rounds, string a_choices, string b_choices, int& score_a, int& score_b) {
+void play(int rounds, string a_choices, int& score_a, int& score_b) {
     vector<bool> self_choices; // Свои решения
     vector<bool> enemy_choices; // решения противника
     for (int i = 0; i < rounds; i++) {
         bool a_choice, b_choice;
         if (a_choices == "Сотрудничает") {
-            a_choice = sotr(i, self_choices, enemy_choices);
+            a_choice = sotr();
         } else if (a_choices == "Предаёт") {
-            a_choice = pred(i, self_choices, enemy_choices);
+            a_choice = pred();
         } else if (a_choices == "Не повторяет") {
-            a_choice = notrepeat(i, self_choices, enemy_choices);
+            a_choice = notrepeat(i, enemy_choices);
         }
-        b_choice = notrepeat(i, enemy_choices, self_choices);
+        b_choice = notrepeat(i, self_choices);
 
         if (a_choice == true && b_choice == true) { // оба сотрудничают
             self_choices.push_back(true);
@@ -70,19 +70,19 @@ int main() {
     // Игра 1(Мы всегда сотрудничаем, противник всегда не повторяет)
     int rounds = 100 + rand() % 101;
     int score_a = 0, score_b = 0;
-    play(rounds, "Сотрудничает", "Не повторяет", score_a, score_b);
+    play(rounds, "Сотрудничает", score_a, score_b);
     cout << "Игра 1.\nКол-во раундов: " << rounds << "\nАлгоритм A: " << score_a << "\nАлгоритм B: " << score_b << endl << endl;
 
     // Игра 2(Мы всегда предаём, противник всегда не повторяет)
     rounds = 100 + rand() % 101;
     score_a = 0, score_b = 0;
-    play(rounds, "Предаёт", "Не повторяет", score_a, score_b);
+    play(rounds, "Предаёт", score_a, score_b);
     cout << "Игра 2.\nКол-во раундов: " << rounds << "\nАлгоритм A: " << score_a << "\nАлгоритм B: " << score_b << endl << endl;
 
     // Игра 3(Мы всегда не повторяем, противник всегда не повторяет)
     rounds = 100 + rand() % 101;
     score_a = 0, score_b = 0;
-    play(rounds, "Не повторяет", "Не повторяет", score_a, score_b);
+    play(rounds, "Не повторяет", score_a, score_b);
     cout << "Игра 3.\nКол-во раундов: " << rounds << "\nАлгоритм A: " << score_a << "\nАлгоритм B: " << score_b << endl;   
 
     return 0;
