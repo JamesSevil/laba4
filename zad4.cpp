@@ -29,7 +29,12 @@ void play(int rounds, string a_choices, int& score_a, int& score_b) {
         } else if (a_choices == "Не повторяет") {
             a_choice = notrepeat(i, enemy_choices);
         }
-        b_choice = notrepeat(i, self_choices);
+        int randomvalue = rand() % 2;
+        if (randomvalue == 0) {
+            b_choice = false;
+        } else {
+            b_choice = true;
+        }
 
         if (a_choice == true && b_choice == true) { // оба сотрудничают
             self_choices.push_back(true);
@@ -67,19 +72,19 @@ int main() {
     setlocale(LC_ALL, "Rus");
     srand(time(0));
 
-    // Игра 1(Мы всегда сотрудничаем, противник всегда не повторяет)
+    // Игра 1(Мы всегда сотрудничаем, противник всегда рандом)
     int rounds = 100 + rand() % 101;
     int score_a = 0, score_b = 0;
     play(rounds, "Сотрудничает", score_a, score_b);
     cout << "Игра 1.\nКол-во раундов: " << rounds << "\nАлгоритм A: " << score_a << "\nАлгоритм B: " << score_b << endl << endl;
 
-    // Игра 2(Мы всегда предаём, противник всегда не повторяет)
+    // Игра 2(Мы всегда предаём, противник всегда рандом)
     rounds = 100 + rand() % 101;
     score_a = 0, score_b = 0;
     play(rounds, "Предаёт", score_a, score_b);
     cout << "Игра 2.\nКол-во раундов: " << rounds << "\nАлгоритм A: " << score_a << "\nАлгоритм B: " << score_b << endl << endl;
 
-    // Игра 3(Мы всегда не повторяем, противник всегда не повторяет)
+    // Игра 3(Мы всегда не повторяем, противник всегда рандом)
     rounds = 100 + rand() % 101;
     score_a = 0, score_b = 0;
     play(rounds, "Не повторяет", score_a, score_b);
