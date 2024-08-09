@@ -5,12 +5,21 @@
 
 using namespace std;
 
+template <typename T>
+ostream& operator<<(ostream& os, const vector<T>& vec) { // перегрузка вывода вектора
+    for (const auto& element : vec) {
+        os << element << " ";
+    }
+    return os;
+}
+
 vector<int> RC4(int n, int GeneratingOutput) { // алгоритм псевдослучайной генерации чисел
     // Инициализация таблиц
     vector<int> S; // Таблица S
     for (int i = 0; i < pow(2, n); i++) { // таблица замен S
         S.push_back(i);
     }
+    cout << endl << "Таблица S: " << S << endl;
     vector<int> K; // Таблица K
     int key = 1; // Значение ключа
     for (int i = 0; i < pow(2, n); i++) { // Таблица K с ключом от 1 до 6
@@ -22,11 +31,13 @@ vector<int> RC4(int n, int GeneratingOutput) { // алгоритм псевдо�
             key = 1;
         }
     }
+    cout << "Таблица K: " << K << endl;
     int j = 0;
     for (int i = 0; i < pow(2, n); i++) { // перестановка
         j = (j + S[i] + K[i]) % (int(pow(2, n)));
         swap(S[i], S[j]);
     }
+    cout << "Перемешанная таблица S: " << S << endl;
 
     // Алгоритм псевдослучайной генерации
     vector<int> Z; // Рандомные числа
@@ -43,14 +54,6 @@ vector<int> RC4(int n, int GeneratingOutput) { // алгоритм псевдо�
     }
 
     return Z;
-}
-
-template <typename T>
-ostream& operator<<(ostream& os, const vector<T>& vec) { // перегрузка вывода вектора
-    for (const auto& element : vec) {
-        os << element << " ";
-    }
-    return os;
 }
 
 
